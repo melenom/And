@@ -60,13 +60,18 @@ class ViewController: UIViewController {
         
         view.pz.backgroundColor(.blue)
         
-        view.addSubview(
-            UIButton().pz
-                .addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
-                .font(.boldSystemFont(ofSize: 12), size: 13)
-                .text("Tap Me", for: .normal)
-                .base
-        )
+        let bnt = UIButton().pz
+            .addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
+            .font(.boldSystemFont(ofSize: 12), size: 13)
+            .text("hello world!!", for: .normal)
+            .color(.brown, for: .normal)
+            .base
+        
+        view.addSubview(bnt)
+        
+        bnt.pz.make { make in
+            make.bottom.equalToSuperview()
+        }
         
         view.pz.addSubview(
             UIButton().pz.text("tap me", for: .normal)
@@ -75,10 +80,10 @@ class ViewController: UIViewController {
                 .backgroundColor(.cyan)
                 .base
         ){
-            $0.left.equalTo(self.view.nice.left).offSet(100)
-            $0.centerX.equalTo(self.view.nice.centerX)
-            $0.top.equalTo(self.view.nice.top).offSet(200)
-            $0.centerY.equalTo(self.view.nice.centerY)
+            $0.left.equalTo(self.view.nice.left).offSet(10)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(self.view.nice.top).offSet(300)
+            $0.centerY.equalToSuperview()
         }
     }
 

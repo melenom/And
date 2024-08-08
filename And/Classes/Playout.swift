@@ -48,30 +48,32 @@ public struct Layout<Base> {
 
 public struct LayoutAnchor<anchorType> {
     let base:anchorType
-    init(_ base: anchorType) {
+    let superView:anchorType?
+    init(_ base: anchorType,_ superView:anchorType?) {
         self.base = base
+        self.superView = superView
     }
 }
 
 
 extension Layout where Base:UIView {
     public var centerX: LayoutAnchor<NSLayoutXAxisAnchor> {
-        return LayoutAnchor(base.centerXAnchor)
+        return LayoutAnchor(base.centerXAnchor, base.superview?.centerXAnchor)
     }
     public var centerY: LayoutAnchor<NSLayoutYAxisAnchor> {
-        return LayoutAnchor(base.centerYAnchor)
+        return LayoutAnchor(base.centerYAnchor, base.superview?.centerYAnchor)
     }
     public var left: LayoutAnchor<NSLayoutXAxisAnchor> {
-        return LayoutAnchor( base.leftAnchor)
+        return LayoutAnchor( base.leftAnchor, base.superview?.leftAnchor)
     }
     public var right: LayoutAnchor<NSLayoutXAxisAnchor> {
-        return LayoutAnchor(base.rightAnchor)
+        return LayoutAnchor(base.rightAnchor, base.superview?.rightAnchor)
     }
     public var top: LayoutAnchor<NSLayoutYAxisAnchor> {
-        return LayoutAnchor(base.topAnchor)
+        return LayoutAnchor(base.topAnchor, base.superview?.topAnchor)
     }
     public var bottom: LayoutAnchor<NSLayoutYAxisAnchor> {
-        return LayoutAnchor(base.bottomAnchor)
+        return LayoutAnchor(base.bottomAnchor, base.superview?.bottomAnchor)
     }
 }
 
@@ -82,24 +84,68 @@ extension LayoutAnchor where anchorType:NSLayoutAnchor<NSLayoutXAxisAnchor> {
     }
     
     @discardableResult
+    public func equalToSuperview()->LayoutConstraint<NSLayoutConstraint>{
+        guard let superView = self.superView  else {
+            return .init(.init())
+        }
+        return self.base.constraint(equalTo: superView).isActive(true)
+    }
+    
+    @discardableResult
     public func lessThanOrEqualTo(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
         self.base.constraint(lessThanOrEqualTo: anchor.base).isActive(true)
     }
+    
+    @discardableResult
+    public func lessThanOrEqualToSuperview()->LayoutConstraint<NSLayoutConstraint>{
+        guard let superView = self.superView  else {
+            return .init(.init())
+        }
+        return self.base.constraint(lessThanOrEqualTo: superView).isActive(true)
+    }
+    
     @discardableResult
     public func greaterThanOrEqualTo(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
         self.base.constraint(greaterThanOrEqualTo: anchor.base).isActive(true)
     }
+    
+    @discardableResult
+    public func greaterThanOrEqualToSuperview(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
+        guard let superView = self.superView  else {
+            return .init(.init())
+        }
+        return self.base.constraint(greaterThanOrEqualTo: superView).isActive(true)
+    }
 }
 
 extension LayoutAnchor where anchorType:NSLayoutAnchor<NSLayoutYAxisAnchor> {
+    
     @discardableResult
     public func equalTo(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
         self.base.constraint(equalTo: anchor.base).isActive(true)
     }
+    
+    @discardableResult
+    public func equalToSuperview()->LayoutConstraint<NSLayoutConstraint>{
+        guard let superView = self.superView  else {
+            return .init(.init())
+        }
+        return self.base.constraint(equalTo: superView).isActive(true)
+    }
+    
     @discardableResult
     public func lessThanOrEqualTo(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
         self.base.constraint(lessThanOrEqualTo: anchor.base).isActive(true)
     }
+    
+    @discardableResult
+    public func lessThanOrEqualToSuperview()->LayoutConstraint<NSLayoutConstraint>{
+        guard let superView = self.superView  else {
+            return .init(.init())
+        }
+        return self.base.constraint(lessThanOrEqualTo: superView).isActive(true)
+    }
+    
     @discardableResult
     public func greaterThanOrEqualTo(_ anchor:LayoutAnchor)->LayoutConstraint<NSLayoutConstraint>{
         self.base.constraint(greaterThanOrEqualTo: anchor.base).isActive(true)
