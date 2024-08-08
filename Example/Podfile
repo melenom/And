@@ -6,5 +6,5 @@ target 'Example' do
   use_frameworks!
 
   pod 'And', :path => '../'
-
+  pod 'SnapKit'
 end

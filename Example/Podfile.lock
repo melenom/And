@@ -1,8 +1,14 @@
 PODS:
   - And (0.0.1)
+  - SnapKit (5.7.1)
 
 DEPENDENCIES:
   - And (from `../`)
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
 
 EXTERNAL SOURCES:
   And:
@@ -10,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   And: e32417c0cd8b3ec30e99a5b888dbc48e9c29f356
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
 
-PODFILE CHECKSUM: 0a8bc9980b2dc6b845480b4db781e3fe16305b3c
+PODFILE CHECKSUM: 9d0b6d9fa3488e84d27d313be2a18bcf3b6f33c7
 
 COCOAPODS: 1.15.2

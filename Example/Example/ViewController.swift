@@ -7,6 +7,7 @@
 
 import UIKit
 import And
+import SnapKit
 
 class ViewController: UIViewController {
 
@@ -63,10 +64,22 @@ class ViewController: UIViewController {
             UIButton().pz
                 .addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
                 .font(.boldSystemFont(ofSize: 12), size: 13)
-                .color(.yellow, for: .normal)
                 .text("Tap Me", for: .normal)
                 .base
         )
+        
+        view.pz.addSubview(
+            UIButton().pz.text("tap me", for: .normal)
+                .color(.red, for: .normal)
+                .color(.yellow, for: .normal)
+                .backgroundColor(.cyan)
+                .base
+        ){
+            $0.left.equalTo(self.view.nice.left).offSet(100)
+            $0.centerX.equalTo(self.view.nice.centerX)
+            $0.top.equalTo(self.view.nice.top).offSet(200)
+            $0.centerY.equalTo(self.view.nice.centerY)
+        }
     }
 
     @objc private func buttonTap(){
