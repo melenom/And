@@ -54,7 +54,12 @@ public struct LayoutAnchor<anchorType> {
         self.superView = superView
     }
 }
-
+public struct LayoutDimension {
+    let base:NSLayoutDimension
+    init(_ base: NSLayoutDimension) {
+        self.base = base
+    }
+}
 
 extension Layout where Base:UIView {
     public var centerX: LayoutAnchor<NSLayoutXAxisAnchor> {
@@ -74,6 +79,14 @@ extension Layout where Base:UIView {
     }
     public var bottom: LayoutAnchor<NSLayoutYAxisAnchor> {
         return LayoutAnchor(base.bottomAnchor, base.superview?.bottomAnchor)
+    }
+}
+extension Layout where Base:UIView {
+    public var width: LayoutDimension {
+        return LayoutDimension(base.widthAnchor)
+    }
+    public var height: LayoutDimension {
+        return LayoutDimension(base.heightAnchor)
     }
 }
 
@@ -152,7 +165,11 @@ extension LayoutAnchor where anchorType:NSLayoutAnchor<NSLayoutYAxisAnchor> {
     }
 }
 
-
+extension LayoutDimension {
+    public func equalTo(_ value:CGFloat){
+        base.constraint(equalToConstant: value).isActive(true)
+    }
+}
 
 extension PProtocol {
     public var nice:Layout<Self>{

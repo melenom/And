@@ -65,12 +65,16 @@ class ViewController: UIViewController {
             .font(.boldSystemFont(ofSize: 12), size: 13)
             .text("hello world!!", for: .normal)
             .color(.brown, for: .normal)
+            .backgroundColor(.red)
             .base
         
         view.addSubview(bnt)
         
         bnt.pz.make { make in
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offSet(-60)
+            make.height.equalTo(30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(100)
         }
         
         view.pz.addSubview(
@@ -81,9 +85,9 @@ class ViewController: UIViewController {
                 .base
         ){
             $0.left.equalTo(self.view.nice.left).offSet(10)
-            $0.centerX.equalToSuperview()
             $0.top.equalTo(self.view.nice.top).offSet(300)
-            $0.centerY.equalToSuperview()
+            $0.height.equalTo(40)
+            $0.width.equalTo(200)
         }
     }
 
