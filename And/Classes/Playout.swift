@@ -27,14 +27,15 @@ extension PWrapper where Base:UIView {
     }
     
     @discardableResult
-    public func remake(block:(Base)->Void)-> PWrapper {
-        block(base)
+    public func remake(block:(_ make:Layout<Base>)->Void)-> PWrapper {
+        base.removeConstraints(base.constraints)
+        block(Layout(base))
         return self
     }
     
     @discardableResult
     public func remove()-> PWrapper {
-       
+        base.removeConstraints(base.constraints)
         return self
     }
 }

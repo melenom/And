@@ -76,6 +76,12 @@ class ViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalTo(100)
         }
+        .remake { make in
+            make.bottom.equalToSuperview().offSet(-60)
+            make.height.equalTo(30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(300)
+        }
         
         view.pz.addSubview(
             UIButton().pz.text("tap me", for: .normal)
